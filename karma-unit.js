@@ -1,5 +1,5 @@
 module.exports = function ( karma ) {
-  karma.set({
+  karma.configure({
     /** 
      * From where to look for files, starting with the location of this file.
      */
@@ -9,16 +9,21 @@ module.exports = function ( karma ) {
      * This is the list of file patterns to load into the browser during testing.
      */
     files: [
-      <% scripts.forEach( function ( file ) { %>'<%= file %>',
-      <% }); %>
+      'libs/angular/angular.js',
+      'libs/angular-resource/angular-resource.js',
+      'libs/angular-ui-router/release/angular-ui-router.js',
+      'libs/angular-mocks/angular-mocks.js',
+      'build/templates.js',
       'src/**/*.js',
       'src/**/*.coffee',
     ],
     exclude: [
       'src/assets/**/*.js'
+      'src/**/*.scenario.js',
+      'src/**/*.scenario.coffee'
     ],
     frameworks: [ 'jasmine' ],
-    plugins: [ 'karma-jasmine', 'karma-firefox-launcher', 'karma-coffee-preprocessor' ],
+    plugins: [ 'karma-jasmine', 'karma-coffee-preprocessor','karma-phantomjs-launcher' ],
     preprocessors: {
       '**/*.coffee': 'coffee',
     },
@@ -55,7 +60,6 @@ module.exports = function ( karma ) {
      * the aesthetic advantage of not launching a browser every time you save.
      */
     browsers: [
-      'Firefox'
     ]
   });
 };

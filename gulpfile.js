@@ -9,6 +9,10 @@ var karma = require('gulp-karma')({
     configFile: 'karma-unit.js'
 });
 
+var protractor = require('gulp-protractor').protractor({
+    configFile: 'protractor.config.js'
+});
+
 // Build Config
 
 var build_dir = 'build';
@@ -17,9 +21,11 @@ var build_dir = 'build';
 var app_files = {  
   sass: [ 'src/style/**/*.scss' ],
 
-  coffee: [ 'src/**/*.coffee', '!src/**/*.spec.coffee' ],
+  coffee: [ 'src/**/*.coffee', '!src/**/*.spec.coffee', '!src/**/*.scenario.coffee' ],
 
   spec: [ 'src/**/*.spec.coffee' ],
+
+  protractor: [ 'src/**/*.scenario.coffee' ],
 
   atpl: [ 'src/app/**/*.tpl.html' ],
   ctpl: [ 'src/common/**/*.tpl.html' ],
@@ -125,6 +131,17 @@ gulp.task('karma', function () {
     return karma.once();
 });
 
+gulp.task('karma-autowatch', function () {
+    return karma.start({autoWatch: true});
+});
+
+gulp.task('webdriver_update', protractor.webdriver_update);
+
+gulp.task('protractor', ['webdriver_update'], function () {
+    return gulp.src(app_files.protractor)
+    .pipe(protractor.protractor);
+});
+
 // Main Tasks
 
 gulp.task('watch', function() {
@@ -141,5 +158,5 @@ gulp.task('build', function() {
     'index');
 });
 
-gulp.task('default', ['build', 'karma', 'watch'], function() {
+gulp.task('default', ['build', 'karma', 'watch', 'karma-autowatch'], function() {
 });

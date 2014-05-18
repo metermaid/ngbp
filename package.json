@@ -1,5 +1,5 @@
 {
-  "author": "Rita Cheng / Josh David Miller",
+  "author": "Rita Cheng",
   "name": "ngbp",
   "version": "0.0.1",
   "homepage": "https://github.com/metermaid/ngbp",
@@ -25,6 +25,9 @@
     "karma-phantomjs-launcher": "~0.1.1",
     "karma-jasmine": "^0.1.5",
     "karma-coffee-preprocessor": "^0.2.1",
-    "karma": "^0.12.9"
+    "karma": "^0.12.9",
+
+    "protractor": "0.22.0",
+    "gulp-protractor": "^0.0.7"
   }
 }
