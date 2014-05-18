@@ -1,17 +1,15 @@
-# [ngBoilerplate](http://joshdmiller.github.com/ng-boilerplate) [![Build Status](https://api.travis-ci.org/ngbp/ngbp.png?branch=v0.3.2-release)](https://travis-ci.org/ngbp/ngbp)
+# ngbp (based on [ngBoilerplate](http://joshdmiller.github.com/ng-boilerplate)) 
 
 An opinionated version of an opinionated [kickstarter](http://joshdmiller.github.com/ng-boilerplate) for [AngularJS](http://angularjs.org) projects.
 
 Fork with the following goals:
-- Coffee script by default
-- Change build systems from Grunt to Gulp (It's much faster, and more understandable for me. Code > Configuration)
+- Coffee script by default (done)
+- Change build systems from Grunt to Gulp (It's much faster, and more understandable for me. Code > Configuration) (done)
 - Include SASS and Bourbon / Neat / Bitters / some Refills
 
 ***
 
 ## Quick Start
-
-When this works...
 
 Install Node.js and then:
 
@@ -21,6 +19,7 @@ $ cd ngbp
 $ sudo npm -g gulp karma bower
 $ npm install
 $ bower install
+$ gem install sass (assuming you have ruby and rubygems...)
 $ gulp
 
 ```
