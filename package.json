@@ -14,13 +14,12 @@
 
     "gulp-coffee": "^1.4.1",
     "gulp-coffeelint": "^0.2.2",
+    "gulp-inject": "^0.3.0",
     "gulp-ng-html2js": "^0.1.6",
     "gulp-ruby-sass": "^0.4.1",
 
     "gulp-uglify": "^0.2.1",
     "gulp-minify-html": "^0.1.2",
-
-    "gulp-jshint": "^1.6.0",
 
     "gulp-karma": "0.0.4",
     "karma-phantomjs-launcher": "~0.1.1",

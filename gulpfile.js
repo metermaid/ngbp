@@ -5,6 +5,10 @@ plugins.sass = require('gulp-ruby-sass');
 
 var runSequence = require('run-sequence'); // needed for non-dependent ordered tasks
 
+var karma = require('gulp-karma')({
+    configFile: 'karma-unit.js'
+});
+
 // Build Config
 
 var build_dir = 'build';
@@ -36,8 +40,7 @@ var destinations = {
 var vendor_files = {
   js: [
     'vendor/angular/angular.js',
-    'vendor/angular-ui-router/release/angular-ui-router.js',
-    'vendor/angular-ui-utils/modules/route/route.js'
+    'vendor/angular-ui-router/release/angular-ui-router.js'
   ],
   css: [
   ],
@@ -45,7 +48,14 @@ var vendor_files = {
   ]
 };
 
-// Tasks
+var index_paths = [
+  destinations.libs + "*.js",
+  destinations.js + "/src/**/*.js",
+  destinations.js + "/templates.js",
+  destinations.css + "/*.css"
+];
+
+// Compilation Tasks
 
 gulp.task('clean', function () {
     return gulp.src(['build/'], {read: false})
@@ -65,16 +75,37 @@ gulp.task('compile', function () {
         .pipe(gulp.dest(destinations.js));
 });
 
+gulp.task('coffeelint', function () {
+    return gulp.src(app_files.coffee)
+        .pipe(coffeelint())
+        .pipe(coffeelint.reporter());
+});
+
 gulp.task('templates', function () {
     return gulp.src(app_files.atpl)
         .pipe(plugins.ngHtml2js({moduleName: 'templates'}))
+        .pipe(plugins.concat('templates.js'))
         .pipe(plugins.uglify())
         .pipe(gulp.dest(destinations.js));
 });
 
-gulp.task('vendors', function () {
+gulp.task('vendors', ['vendors-js']);
+// dependencies can't be empty, so just js for now. see:
+// https://github.com/ck86/gulp-bower-files/issues/21
+
+gulp.task('vendors-js', function () {
     return gulp.src(vendor_files.js)
         .pipe(gulp.dest(destinations.libs));
+});
+
+gulp.task('vendors-css', function () {
+    return gulp.src(vendor_files.css)
+        .pipe(gulp.dest(destinations.css));
+});
+
+gulp.task('vendors-assets', function () {
+    return gulp.src(vendor_files.assets)
+        .pipe(gulp.dest(destinations.assets));
 });
 
 gulp.task('assets', function () {
@@ -83,9 +114,18 @@ gulp.task('assets', function () {
 });
 
 gulp.task('index', function () {
-    return gulp.src(app_files.html)
+    return gulp.src(index_paths, {read: false})
+        .pipe(plugins.inject(app_files.html))
         .pipe(gulp.dest(destinations.html));
 });
+
+// Testing Tasks
+
+gulp.task('karma', function () {
+    return karma.once();
+});
+
+// Main Tasks
 
 gulp.task('watch', function() {
   gulp.watch(app_files.sass, ['styles']);
@@ -101,6 +141,5 @@ gulp.task('build', function() {
     'index');
 });
 
-gulp.task('default', ['build'], function() {
-  runSequence('watch');
+gulp.task('default', ['build', 'karma', 'watch'], function() {
 });
