@@ -21,13 +21,18 @@
     "gulp-uglify": "^0.2.1",
     "gulp-minify-html": "^0.1.2",
 
-    "gulp-karma": "0.0.4",
+    "gulp-karma": "git://github.com/lazd/gulp-karma.git#adb54c4fdddb442778aa114343645b75192e41e5",
     "karma-phantomjs-launcher": "~0.1.1",
     "karma-jasmine": "^0.1.5",
+    "karma-chrome-launcher": "~0.1.2",
     "karma-coffee-preprocessor": "^0.2.1",
     "karma": "^0.12.9",
+    "karma-script-launcher": "~0.1.0",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-requirejs": "~0.1.0",
 
     "protractor": "0.22.0",
-    "gulp-protractor": "^0.0.7"
+    "gulp-protractor": "^0.0.7",
+    "astrolabe": "^0.3.4-alpha"
   }
 }

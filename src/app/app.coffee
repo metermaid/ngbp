@@ -1,6 +1,5 @@
 modules = [
-  'templates-app',
-  'templates-common',
+  'templates',
   'ngBoilerplate.home',
   'ui.router'
 ]

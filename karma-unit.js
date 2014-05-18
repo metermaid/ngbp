@@ -1,31 +1,28 @@
-module.exports = function ( karma ) {
-  karma.configure({
-    /** 
-     * From where to look for files, starting with the location of this file.
-     */
-    basePath: '../',
-
+module.exports = function(config) {
+  config.set({
     /**
      * This is the list of file patterns to load into the browser during testing.
      */
     files: [
-      'libs/angular/angular.js',
-      'libs/angular-resource/angular-resource.js',
-      'libs/angular-ui-router/release/angular-ui-router.js',
-      'libs/angular-mocks/angular-mocks.js',
-      'build/templates.js',
-      'src/**/*.js',
-      'src/**/*.coffee',
+      'vendor/angular/angular.js',
+      'vendor/angular-ui-router/release/angular-ui-router.js',
+      'vendor/angular-mocks/angular-mocks.js',
+      'build/src/templates.js',
+      'src/**/*.coffee'
     ],
     exclude: [
-      'src/assets/**/*.js'
-      'src/**/*.scenario.js',
+      'src/assets/**/*.js',
       'src/**/*.scenario.coffee'
     ],
     frameworks: [ 'jasmine' ],
-    plugins: [ 'karma-jasmine', 'karma-coffee-preprocessor','karma-phantomjs-launcher' ],
+    plugins: [ 
+          'karma-jasmine',
+          'karma-chrome-launcher',
+          'karma-coffee-preprocessor',
+          'karma-phantomjs-launcher'
+           ],
     preprocessors: {
-      '**/*.coffee': 'coffee',
+      '**/*.coffee': 'coffee'
     },
 
     /**

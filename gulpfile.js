@@ -9,9 +9,7 @@ var karma = require('gulp-karma')({
     configFile: 'karma-unit.js'
 });
 
-var protractor = require('gulp-protractor').protractor({
-    configFile: 'protractor.config.js'
-});
+var protractor = require('gulp-protractor');
 
 // Build Config
 
@@ -57,7 +55,7 @@ var vendor_files = {
 var index_paths = [
   destinations.libs + "*.js",
   destinations.js + "/src/**/*.js",
-  destinations.js + "/templates.js",
+  destinations.js + "/src/templates.js",
   destinations.css + "/*.css"
 ];
 
@@ -121,7 +119,10 @@ gulp.task('assets', function () {
 
 gulp.task('index', function () {
     return gulp.src(index_paths, {read: false})
-        .pipe(plugins.inject(app_files.html))
+        .pipe(plugins.inject(app_files.html, {
+            ignorePath: build_dir,
+            addRootSlash: false
+        }))
         .pipe(gulp.dest(destinations.html));
 });
 
@@ -139,7 +140,9 @@ gulp.task('webdriver_update', protractor.webdriver_update);
 
 gulp.task('protractor', ['webdriver_update'], function () {
     return gulp.src(app_files.protractor)
-    .pipe(protractor.protractor);
+    .pipe(protractor.protractor({
+        configFile: 'protractor.config.js'
+    }));
 });
 
 // Main Tasks
