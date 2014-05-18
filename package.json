@@ -5,16 +5,23 @@
   "homepage": "https://github.com/metermaid/ngbp",
   "devDependencies": {
     "coffee-script": "^1.7.1",
+
     "gulp": "^3.6.2",
+    "gulp-concat": "^2.2.0",
+    "gulp-clean": "^0.2.4",
+    "run-sequence": "^0.3.6",
+    "gulp-load-plugins": "^0.4.0",
+
     "gulp-coffee": "^1.4.1",
     "gulp-coffeelint": "^0.2.2",
-    "gulp-concat": "^2.2.0",
     "gulp-ng-html2js": "^0.1.6",
-    "gulp-uglify": "^0.2.1",
     "gulp-ruby-sass": "^0.4.1",
+
+    "gulp-uglify": "^0.2.1",
     "gulp-minify-html": "^0.1.2",
+
     "gulp-jshint": "^1.6.0",
-    "gulp-clean": "^0.2.4",
+
     "gulp-karma": "0.0.4",
     "karma-phantomjs-launcher": "~0.1.1",
     "karma-jasmine": "^0.1.5",

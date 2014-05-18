@@ -1,5 +1,9 @@
 var gulp = require('gulp');
-var sass = require('gulp-ruby-sass');
+
+var plugins = require('gulp-load-plugins')();
+plugins.sass = require('gulp-ruby-sass');
+
+var runSequence = require('run-sequence'); // needed for non-dependent ordered tasks
 
 // Build Config
 
@@ -43,20 +47,60 @@ var vendor_files = {
 
 // Tasks
 
+gulp.task('clean', function () {
+    return gulp.src(['build/'], {read: false})
+        .pipe(plugins.clean());
+});
+
 gulp.task('styles', function() {
   return gulp.src(app_files.sass)
-        .pipe(sass({sourcemap:true}))
+        .pipe(plugins.sass({sourcemap:true}))
         .pipe(gulp.dest(destinations.css));
 });
 
+gulp.task('compile', function () {
+    return gulp.src(app_files.coffee)
+        .pipe(plugins.coffee({emitError: false}))
+        .pipe(plugins.uglify())
+        .pipe(gulp.dest(destinations.js));
+});
+
+gulp.task('templates', function () {
+    return gulp.src(app_files.atpl)
+        .pipe(plugins.ngHtml2js({moduleName: 'templates'}))
+        .pipe(plugins.uglify())
+        .pipe(gulp.dest(destinations.js));
+});
+
+gulp.task('vendors', function () {
+    return gulp.src(vendor_files.js)
+        .pipe(gulp.dest(destinations.libs));
+});
+
+gulp.task('assets', function () {
+    return gulp.src(app_files.assets)
+        .pipe(gulp.dest(destinations.assets));
+});
+
+gulp.task('index', function () {
+    return gulp.src(app_files.html)
+        .pipe(gulp.dest(destinations.html));
+});
+
 gulp.task('watch', function() {
-  gulp.watch(app_files.sass, ['sass']);
+  gulp.watch(app_files.sass, ['styles']);
+  gulp.watch(app_files.coffee, ['compile']);
+  gulp.watch([app_files.atpl, app_files.ctpl], ['templates']);
+  gulp.watch(app_files.assets, ['assets']);
+  gulp.watch(app_files.index, ['index']);
 });
 
 gulp.task('build', function() {
-  gulp.task('styles');
+  runSequence('clean',
+    ['styles', 'compile', 'templates', 'vendors', 'assets'],
+    'index');
 });
 
 gulp.task('default', ['build'], function() {
-  // place code for your default task here
+  runSequence('watch');
 });
