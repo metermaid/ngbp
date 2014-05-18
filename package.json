@@ -14,9 +14,11 @@
 
     "gulp-coffee": "^1.4.1",
     "gulp-coffeelint": "^0.2.2",
-    "gulp-inject": "^0.3.0",
+    "gulp-inject": "^0.4.1",
     "gulp-ng-html2js": "^0.1.6",
     "gulp-ruby-sass": "^0.4.1",
+
+    "gulp-print": "^1.0.3",
 
     "gulp-uglify": "^0.2.1",
     "gulp-minify-html": "^0.1.2",

@@ -53,9 +53,9 @@ var vendor_files = {
 };
 
 var index_paths = [
-  destinations.libs + "*.js",
-  destinations.js + "/src/**/*.js",
-  destinations.js + "/src/templates.js",
+  destinations.libs + "/*.js",
+  destinations.js + "/**/*.js",
+  destinations.js + "/templates.js",
   destinations.css + "/*.css"
 ];
 
@@ -118,11 +118,10 @@ gulp.task('assets', function () {
 });
 
 gulp.task('index', function () {
-    return gulp.src(index_paths, {read: false})
-        .pipe(plugins.inject(app_files.html, {
-            ignorePath: build_dir,
-            addRootSlash: false
-        }))
+    return gulp.src(app_files.html)
+        .pipe(plugins.inject(gulp.src(index_paths, {read: false, base: build_dir})
+          .pipe(plugins.print())
+        ,{}))
         .pipe(gulp.dest(destinations.html));
 });
 
