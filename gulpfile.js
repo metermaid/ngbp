@@ -52,8 +52,12 @@ var vendor_files = {
   ]
 };
 
+// libraries are manually injected because they need to go in order...
+// TODO: think of a better way to do this.
+
 var index_paths = [
-  destinations.libs + "/*.js",
+  destinations.libs + "/angular.js",
+  destinations.libs + "/angular-ui-router.js",
   destinations.js + "/**/*.js",
   destinations.js + "/templates.js",
   destinations.css + "/*.css"
