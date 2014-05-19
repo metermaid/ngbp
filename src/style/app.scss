@@ -1,12 +1,24 @@
-$max-width: em(900);
+@import "bourbon/bourbon";
+@import "neat/neat";
+@import "bitters/bitters";
+@import "colors";
+
 body {
-	background: #eaeaea;
-	color: #333;
+	background: white;
 	margin: 0;
 }
-h1,h2,h3,h4,h5,h6 {
-	color: #fff;
+
+#container {
+  @include outer-container;
+  aside { @include span-columns(3); }
+  article { @include span-columns(9); }
+  section { @include span-columns(12); }
 }
+
+#main-header {
+	padding: 0.5em;
+}
+
 .f-left {
 	float: left;
 }

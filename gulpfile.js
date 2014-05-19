@@ -119,9 +119,9 @@ gulp.task('assets', function () {
 
 gulp.task('index', function () {
     return gulp.src(app_files.html)
-        .pipe(plugins.inject(gulp.src(index_paths, {read: false, base: build_dir})
+        .pipe(plugins.inject(gulp.src(index_paths, {read: false})
           .pipe(plugins.print())
-        ,{}))
+        ,{ ignorePath: build_dir, addRootSlash: false }))
         .pipe(gulp.dest(destinations.html));
 });
 

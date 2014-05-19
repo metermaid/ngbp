@@ -3,8 +3,8 @@
 An opinionated version of an opinionated [kickstarter](http://joshdmiller.github.com/ng-boilerplate) for [AngularJS](http://angularjs.org) projects.
 
 Fork with the following goals:
-- Coffee script by default (done)
-- Change build systems from Grunt to Gulp (It's much faster, and more understandable for me. Code > Configuration) (done)
+- Coffee script by default
+- Change build systems from Grunt to Gulp (It's much faster, and more understandable for me. Code > Configuration)
 - Include SASS and Bourbon / Neat / Bitters / some Refills
 
 ***
